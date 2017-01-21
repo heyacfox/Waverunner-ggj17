@@ -74,22 +74,26 @@ public class RunningCharacter : MonoBehaviour {
 	}
 
 	public void midiKeyPressed(int keyDown) {
-		if (!jumping) {
-			if (nw.checkAnyKeyInChord(linkedPM.selfNote)) {
-				jumping = true;
-				linkedPM.playNoteWin ();
-				this.GetComponent<BoxCollider2D> ().enabled = false;
-				rb2d.velocity = new Vector2 (0, jumpStrength);
-				rb2d.gravityScale = 0;
-			} else {
-				linkedPM.playNoteFail ();
+		if (!inputTypeSpace) {
+			if (!jumping) {
+				if (nw.checkAnyKeyInChord (linkedPM.selfNote)) {
+					jumping = true;
+					linkedPM.playNoteWin ();
+					this.GetComponent<BoxCollider2D> ().enabled = false;
+					rb2d.velocity = new Vector2 (0, jumpStrength);
+					rb2d.gravityScale = 0;
+				} else {
+					linkedPM.playNoteFail ();
+				}
 			}
 		}
 	}
 
 	public void allMidiKeysReleased() {
-		rb2d.gravityScale = gravityActual;
-		this.GetComponent<BoxCollider2D> ().enabled = true;
+		if (!inputTypeSpace) {
+			rb2d.gravityScale = gravityActual;
+			this.GetComponent<BoxCollider2D> ().enabled = true;
+		}
 	}
 	
 

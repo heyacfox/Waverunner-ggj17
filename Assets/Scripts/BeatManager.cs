@@ -84,10 +84,10 @@ public class BeatManager : MonoBehaviour {
 		chordNoteProgression.Enqueue("GSm7");
 		chordNoteProgression.Enqueue("CSmin9");
 		chordNoteProgression.Enqueue("Cmaj7");
-		chordNoteProgression.Enqueue("D#min7b5");
-		chordNoteProgression.Enqueue("F#min7");
+		chordNoteProgression.Enqueue("DSmin7b5");
+		chordNoteProgression.Enqueue("FSmin7");
 		chordNoteProgression.Enqueue("G#maj");
-		chordNoteProgression.Enqueue("Emaj7#5");
+		chordNoteProgression.Enqueue("Emaj7S5");
 		chordNoteProgression.Enqueue("CSmin9");
 
 		chordChangeTimings = new Queue<float> ();
@@ -102,31 +102,31 @@ public class BeatManager : MonoBehaviour {
 		*/
 
 		chordChangeTimings.Enqueue(beatTimerDHPDQ);
-		chordChangeTimings.Enqueue(beatTimerWN);
+		chordChangeTimings.Enqueue(beatTimerEPW);
 		chordChangeTimings.Enqueue(beatTimerDHPDQ);
-		chordChangeTimings.Enqueue(beatTimerWN);
+		chordChangeTimings.Enqueue(beatTimerEPW);
 		chordChangeTimings.Enqueue(beatTimerDHPDQ);
-		chordChangeTimings.Enqueue(beatTimerWN);
+		chordChangeTimings.Enqueue(beatTimerEPW);
 		chordChangeTimings.Enqueue(beatTimerDHPDQ);
-		chordChangeTimings.Enqueue(beatTimerWN);
+		chordChangeTimings.Enqueue(beatTimerEPW);
 		chordChangeTimings.Enqueue(beatTimerDHPDQ);
-		chordChangeTimings.Enqueue(beatTimerWN);
+		chordChangeTimings.Enqueue(beatTimerEPW);
 		chordChangeTimings.Enqueue(beatTimerDHPDQ);
-		chordChangeTimings.Enqueue(beatTimerWN);
+		chordChangeTimings.Enqueue(beatTimerEPW);
 		chordChangeTimings.Enqueue(beatTimerDHPDQ);
-		chordChangeTimings.Enqueue(beatTimerWN);
+		chordChangeTimings.Enqueue(beatTimerEPW);
 		chordChangeTimings.Enqueue(beatTimerDHPDQ);
-		chordChangeTimings.Enqueue(beatTimerWN);
+		chordChangeTimings.Enqueue(beatTimerEPW);
 		chordChangeTimings.Enqueue(beatTimerHN);
 		chordChangeTimings.Enqueue(beatTimerHN);
 		chordChangeTimings.Enqueue(beatTimerHN);
 		chordChangeTimings.Enqueue(beatTimerHN);
 		chordChangeTimings.Enqueue(beatTimerDHPDQ);
+		chordChangeTimings.Enqueue(beatTimerEPW);
+		chordChangeTimings.Enqueue(beatTimerDHPDQ);
+		chordChangeTimings.Enqueue(beatTimerEPW);
 		chordChangeTimings.Enqueue(beatTimerWN);
-		chordChangeTimings.Enqueue(beatTimerDHPDQ);
 		chordChangeTimings.Enqueue(beatTimerWN);
-		chordChangeTimings.Enqueue(beatTimerDHPDQ);
-		chordChangeTimings.Enqueue(beatTimerDHPDQ);
 		chordChangeTimings.Enqueue(beatTimerHN);
 
 
