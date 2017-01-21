@@ -16,7 +16,7 @@ public class RunningCharacter : MonoBehaviour {
 	}
 
 	void Update() {
-		if (Input.GetKey ("space") && !jumping) {
+		if (Input.GetKeyDown ("space") && !jumping) {
 			//bm.checkIfPoint ();
 			jumping = true;
 			rb2d.velocity = new Vector2 (0, jumpStrength);
@@ -28,7 +28,11 @@ public class RunningCharacter : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D col) {
-		jumping = false;
+		if (col.gameObject.tag == "audioblock") {
+			PlatformMovement pm = col.gameObject.GetComponent<PlatformMovement> ();
+			bm.checkToPlayBackingThenPlay ();
+			jumping = false;
+		}
 	}
 	
 

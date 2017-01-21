@@ -10,13 +10,17 @@ public class BeatManager : MonoBehaviour {
 	public float beatTimerStartQuarterNote;
 	float beatTimerQN;
 	float beatTimerHN;
-	float beatTimerWN;
+	public float beatTimerWN;
 	float beatTimerEN;
 	public float acceptableVariance;
 	bool pointGainedThisBeat = false;
 	float activeTime;
 	float currentBeatTimeTracking;
 	int points = 0;
+	public AudioClip backingTrack;
+	AudioSource asource;
+	public PlatformSpawner ps;
+
 
 	// Use this for initialization
 	void Start () {
@@ -25,7 +29,10 @@ public class BeatManager : MonoBehaviour {
 		beatTimerHN = beatTimerQN * 2;
 		beatTimerWN = beatTimerQN * 4;
 		pointText.text = points.ToString();
-		StartCoroutine (PeriodicUpdater(beatTimerHN));
+		asource = this.GetComponent<AudioSource> ();
+
+
+
 	}
 
 	public void checkIfPoint() {
@@ -35,6 +42,14 @@ public class BeatManager : MonoBehaviour {
 				points++;
 				pointText.text = points.ToString();
 			}
+		}
+	}
+
+	public void checkToPlayBackingThenPlay() {
+		if (!asource.isPlaying) {
+			StartCoroutine (PeriodicUpdater(beatTimerWN));
+			asource.clip = backingTrack;
+			asource.Play ();
 		}
 	}
 
@@ -55,6 +70,7 @@ public class BeatManager : MonoBehaviour {
 			if (Time.time >= curTime + beatTimerToTrack) {
 				//Debug.Log ("Do something based on timer");
 				curTime += beatTimerToTrack;
+				ps.spawnPlatform ();
 				pointGainedThisBeat = false;
 			}
 			yield return new WaitForFixedUpdate ();
