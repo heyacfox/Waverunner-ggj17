@@ -26,6 +26,18 @@ public class PlatformMovement : MonoBehaviour {
 
 	void Awake() {
 		rb2d = this.GetComponent<Rigidbody2D> ();
+		/*
+		CSmin9 = new List<AudioClip> ();
+		Cmaj7 = new List<AudioClip> ();
+		Amaj7 = new List<AudioClip> ();
+		GSm7 = new List<AudioClip> ();
+		Dmaj9 = new List<AudioClip> ();
+		Emaj9 = new List<AudioClip> ();
+		DSmin7b5 = new List<AudioClip> ();
+		FSmin7 = new List<AudioClip> ();
+		GS = new List<AudioClip> ();
+		Emaj7S5 = new List<AudioClip> ();
+		*/
 		rb2d.velocity = new Vector2 (platformSpeedAsNegative, 0);
 		noteToAudioList = new Dictionary<string, List<AudioClip>> ();
 		noteToAudioList.Add ("CSmin9", CSmin9);
@@ -38,6 +50,11 @@ public class PlatformMovement : MonoBehaviour {
 		noteToAudioList.Add ("FSmin7", FSmin7);
 		noteToAudioList.Add ("GS", GS);
 		noteToAudioList.Add ("Emaj7S5", Emaj7S5);
+		/*
+		foreach (string k in noteToAudioList.Keys) {
+			Debug.Log ("Key in NTAL:" + k);
+		}
+		*/
 		asource = this.GetComponent<AudioSource> ();
 
 	}
@@ -58,6 +75,8 @@ public class PlatformMovement : MonoBehaviour {
 
 	public void playNoteFail() {
 		List<AudioClip> selecterList = noteToAudioList [selfNote];
+		//Debug.Log ("Self Note:" + selfNote);
+		//Debug.Log ("Count of selectedList:" + selecterList.Count.ToString ());
 		asource.clip = selecterList [0];
 		asource.Play ();
 	}

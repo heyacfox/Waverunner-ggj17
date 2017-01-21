@@ -31,10 +31,75 @@ public class NoteWatcher : MonoBehaviour {
 
 		chordToKeys = new Dictionary<string, List<string>>();
 
-
-
 		List<string> newStrings = new List<string> ();
-		newStrings.Add ("C#");
+		newStrings.Add("C#");
+		newStrings.Add("E");
+		newStrings.Add("B");
+		newStrings.Add("D#");
+		chordToKeys.Add ("CSmin9", newStrings);
+
+		newStrings = new List<string> ();
+		newStrings.Add("C");
+		newStrings.Add("E");
+		newStrings.Add("B");
+		newStrings.Add("G");
+		chordToKeys.Add ("Cmaj7", newStrings);
+
+		newStrings = new List<string> ();
+		newStrings.Add("A");
+		newStrings.Add("C#");
+		newStrings.Add("G#");
+		newStrings.Add("E");
+		chordToKeys.Add ("Amaj7", newStrings);
+
+		newStrings = new List<string> ();
+		newStrings.Add("G#");
+		newStrings.Add("B");
+		newStrings.Add("F#");
+		newStrings.Add("D#");
+		chordToKeys.Add ("GSmin7", newStrings);
+
+		newStrings = new List<string> ();
+		newStrings.Add("D");
+		newStrings.Add("F#");
+		newStrings.Add("C#");
+		newStrings.Add("E");
+		chordToKeys.Add ("Dmaj9", newStrings);
+
+		newStrings = new List<string> ();
+		newStrings.Add("E");
+		newStrings.Add("G#");
+		newStrings.Add("D#");
+		newStrings.Add("F#");
+		chordToKeys.Add ("Emaj9", newStrings);
+
+		newStrings = new List<string> ();
+		newStrings.Add("D#");
+		newStrings.Add("A");
+		newStrings.Add("C#");
+		newStrings.Add("F#");
+		chordToKeys.Add ("DSmin7b5", newStrings);
+
+		newStrings = new List<string> ();
+		newStrings.Add("F#");
+		newStrings.Add("C#");
+		newStrings.Add("E");
+		newStrings.Add("A");
+		chordToKeys.Add ("FSmin7", newStrings);
+
+		newStrings = new List<string> ();
+		newStrings.Add("G#");
+		newStrings.Add("C");
+		newStrings.Add("D#");
+		chordToKeys.Add ("GS", newStrings);
+
+		newStrings = new List<string> ();
+		newStrings.Add("E");
+		newStrings.Add("C");
+		newStrings.Add("D#");
+		newStrings.Add("G#");
+		newStrings.Add("B");
+		chordToKeys.Add ("Emaj7S5", newStrings);
 
 		keysCurrentlyPressed = new List<int> ();
 
@@ -73,11 +138,21 @@ public class NoteWatcher : MonoBehaviour {
 	}
 
 	public bool checkAnyKeyInChord(string chord) {
-		//whatever
+		Debug.Log ("Checking Chord:" + chord);
+		return checkAnyNotesInList (chordToKeys [chord]);
+	}
+
+	public bool checkAnyNotesInList(List<string> notes) {
+		foreach (string s in notes) {
+			if (checkAllKeysOfNote (s)) {
+				return true;
+			}
+		}
 		return false;
 	}
 
 	public bool checkAllKeysInChord(string chord) {
+		//Debug.Log ("Chord Checking:" + chord);
 		List<string> keysToCheck = chordToKeys [chord];
 		//whatever
 		return false;

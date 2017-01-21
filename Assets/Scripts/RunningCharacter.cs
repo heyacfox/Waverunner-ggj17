@@ -75,7 +75,7 @@ public class RunningCharacter : MonoBehaviour {
 
 	public void midiKeyPressed(int keyDown) {
 		if (!jumping) {
-			if (nw.checkAllKeysOfNote(linkedPM.selfNote)) {
+			if (nw.checkAnyKeyInChord(linkedPM.selfNote)) {
 				jumping = true;
 				linkedPM.playNoteWin ();
 				this.GetComponent<BoxCollider2D> ().enabled = false;
