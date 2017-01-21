@@ -21,6 +21,13 @@ public class BeatManager : MonoBehaviour {
 	AudioSource asource;
 	public PlatformSpawner ps;
 	public Queue<string> chordNoteProgression;
+	public Queue<float> chordChangeTimings;
+	//chord change timings will be
+	// 1 - Quarter Note
+	// 2 - Half Note
+	// 4 - Whole Note
+	// 0.5 - Eighth note
+	// (measures amount of time to the enxt note)
 	public float realTimeScale;
 
 
@@ -48,6 +55,16 @@ public class BeatManager : MonoBehaviour {
 		//chordNoteProgression.Enqueue ("E");
 		chordNoteProgression.Enqueue ("C");
 
+		chordChangeTimings = new Queue<float> ();
+		chordChangeTimings.Enqueue (beatTimerWN);
+		chordChangeTimings.Enqueue (beatTimerWN);
+		chordChangeTimings.Enqueue (beatTimerWN);
+		chordChangeTimings.Enqueue (beatTimerWN);
+		chordChangeTimings.Enqueue (beatTimerWN);
+		chordChangeTimings.Enqueue (beatTimerWN);
+		chordChangeTimings.Enqueue (beatTimerWN);
+
+
 
 
 
@@ -70,7 +87,9 @@ public class BeatManager : MonoBehaviour {
 
 	public void checkToPlayBackingThenPlay() {
 		if (!asource.isPlaying) {
-			StartCoroutine (PeriodicUpdater(beatTimerWN));
+			float nextChange = chordChangeTimings.Dequeue ();
+			chordChangeTimings.Enqueue (nextChange);
+			StartCoroutine (PeriodicUpdater(nextChange));
 			string cnp = chordNoteProgression.Dequeue ();
 			chordNoteProgression.Enqueue (cnp);
 			asource.clip = backingTrack;
@@ -95,10 +114,14 @@ public class BeatManager : MonoBehaviour {
 			activeTime = timeText;
 			if (Time.time >= curTime + beatTimerToTrack) {
 				//Debug.Log ("Do something based on timer");
-				curTime += beatTimerToTrack;
+				float nextChange = chordChangeTimings.Dequeue ();
+				curTime += nextChange;
+				chordChangeTimings.Enqueue (nextChange);
 				string nextNote = chordNoteProgression.Dequeue ();
 				ps.spawnPlatforms (nextNote);
 				chordNoteProgression.Enqueue (nextNote);
+
+
 				pointGainedThisBeat = false;
 			}
 			yield return new WaitForFixedUpdate ();
