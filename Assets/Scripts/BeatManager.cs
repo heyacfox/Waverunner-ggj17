@@ -41,10 +41,12 @@ public class BeatManager : MonoBehaviour {
 		chordNoteProgression.Enqueue ("C");
 
 		chordNoteProgression.Enqueue ("A");
-		//chordNoteProgression.Enqueue ("G#");
+		chordNoteProgression.Enqueue ("G#");
 		chordNoteProgression.Enqueue ("C#");
 		chordNoteProgression.Enqueue ("C");
+
 		//chordNoteProgression.Enqueue ("E");
+		chordNoteProgression.Enqueue ("C");
 
 
 

@@ -9,6 +9,7 @@ public class PlatformMovement : MonoBehaviour {
 	public List<AudioClip> cSharpMelodies;
 	public List<AudioClip> cMelodies;
 	public List<AudioClip> aMelodies;
+	public List<AudioClip> GSharpMMelodies;
 	Dictionary<string, List<AudioClip>> noteToAudioList;
 	public string selfNote;
 	AudioSource asource;
@@ -22,6 +23,7 @@ public class PlatformMovement : MonoBehaviour {
 		noteToAudioList.Add ("C", cMelodies);
 		noteToAudioList.Add ("C#", cSharpMelodies);
 		noteToAudioList.Add ("A", aMelodies);
+		noteToAudioList.Add ("G#", GSharpMMelodies);
 		asource = this.GetComponent<AudioSource> ();
 
 	}
