@@ -20,6 +20,11 @@ public class RunningCharacter : MonoBehaviour {
 		rb2d = this.GetComponent<Rigidbody2D> ();
 		rb2d.velocity = new Vector2 (0, 0);
 		rb2d.gravityScale = gravityActual;
+		if (InputChecker.instance.inputTypeSpaceHuh) {
+			inputTypeSpace = true;
+		} else {
+			inputTypeSpace = false;
+		}
 
 	}
 

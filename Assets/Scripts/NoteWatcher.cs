@@ -57,7 +57,7 @@ public class NoteWatcher : MonoBehaviour {
 		newStrings.Add("B");
 		newStrings.Add("F#");
 		newStrings.Add("D#");
-		chordToKeys.Add ("GSmin7", newStrings);
+		chordToKeys.Add ("GSm7", newStrings);
 
 		newStrings = new List<string> ();
 		newStrings.Add("D");
@@ -183,7 +183,7 @@ public class NoteWatcher : MonoBehaviour {
 			if (checkOneKey (rotatingCheck)) {
 				return true;
 			}
-			rotatingCheck++;
+			rotatingCheck += 12;
 		}
 		return false;
 	}
