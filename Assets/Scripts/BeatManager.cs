@@ -37,8 +37,14 @@ public class BeatManager : MonoBehaviour {
 
 		//setting up chord progression
 		chordNoteProgression = new Queue<string>();
-		chordNoteProgression.Enqueue ("C");
 		chordNoteProgression.Enqueue ("C#");
+		chordNoteProgression.Enqueue ("C");
+
+		chordNoteProgression.Enqueue ("A");
+		//chordNoteProgression.Enqueue ("G#");
+		chordNoteProgression.Enqueue ("C#");
+		chordNoteProgression.Enqueue ("C");
+		//chordNoteProgression.Enqueue ("E");
 
 
 
@@ -89,7 +95,7 @@ public class BeatManager : MonoBehaviour {
 				//Debug.Log ("Do something based on timer");
 				curTime += beatTimerToTrack;
 				string nextNote = chordNoteProgression.Dequeue ();
-				ps.spawnPlatform (nextNote);
+				ps.spawnPlatforms (nextNote);
 				chordNoteProgression.Enqueue (nextNote);
 				pointGainedThisBeat = false;
 			}

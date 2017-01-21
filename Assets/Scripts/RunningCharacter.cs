@@ -8,10 +8,12 @@ public class RunningCharacter : MonoBehaviour {
 	public float jumpStrength;
 	public BeatManager bm;
 	bool jumping = true;
+	public float gravityActual;
 
 	void Awake() {
 		rb2d = this.GetComponent<Rigidbody2D> ();
 		rb2d.velocity = new Vector2 (0, 0);
+		rb2d.gravityScale = gravityActual;
 
 	}
 
@@ -19,11 +21,13 @@ public class RunningCharacter : MonoBehaviour {
 		if (Input.GetKeyDown ("space") && !jumping) {
 			//bm.checkIfPoint ();
 			jumping = true;
+			this.GetComponent<BoxCollider2D> ().enabled = false;
 			rb2d.velocity = new Vector2 (0, jumpStrength);
 			rb2d.gravityScale = 0;
 		}
 		if (Input.GetKeyUp ("space")) {
-			rb2d.gravityScale = 1;
+			rb2d.gravityScale = gravityActual;
+			this.GetComponent<BoxCollider2D> ().enabled = true;
 		}
 	}
 

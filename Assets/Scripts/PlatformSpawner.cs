@@ -34,13 +34,20 @@ public class PlatformSpawner : MonoBehaviour {
 		*/
 	}
 
-	public void spawnPlatform(string noteToSpawn) {
+	public void spawnPlatform(string noteToSpawn, float heightBegin) {
 		GameObject go = Instantiate (largePlatform, 
-			new Vector3 (14, -4 + (Random.value*2)), 
+			new Vector3 (14, heightBegin + (Random.value*2)), 
 			Quaternion.identity) as GameObject;
 		PlatformMovement pm = go.GetComponent<PlatformMovement> ();
 		pm.GetComponent<Rigidbody2D>().velocity = new Vector2(bm.beatTimerWN * -10f, 0);
+		pm.transform.localScale = new Vector3 (Random.value * 1f + 1f, 1, 1);
 		pm.selfNote = noteToSpawn;
 
+	}
+
+	public void spawnPlatforms(string noteToSpawn) {
+		spawnPlatform (noteToSpawn, -4);
+		//spawnPlatform (noteToSpawn, -1);
+		//spawnPlatform (noteToSpawn, 2);
 	}
 }

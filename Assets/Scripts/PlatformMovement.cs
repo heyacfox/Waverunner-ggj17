@@ -8,6 +8,7 @@ public class PlatformMovement : MonoBehaviour {
 	public float platformSpeedAsNegative;
 	public List<AudioClip> cSharpMelodies;
 	public List<AudioClip> cMelodies;
+	public List<AudioClip> aMelodies;
 	Dictionary<string, List<AudioClip>> noteToAudioList;
 	public string selfNote;
 	AudioSource asource;
@@ -20,6 +21,7 @@ public class PlatformMovement : MonoBehaviour {
 		noteToAudioList = new Dictionary<string, List<AudioClip>> ();
 		noteToAudioList.Add ("C", cMelodies);
 		noteToAudioList.Add ("C#", cSharpMelodies);
+		noteToAudioList.Add ("A", aMelodies);
 		asource = this.GetComponent<AudioSource> ();
 
 	}
@@ -30,6 +32,12 @@ public class PlatformMovement : MonoBehaviour {
 		//asource.clip = selecterList [0];
 		asource.Play ();
 
+	}
+
+	void Update() {
+		if (transform.position.x < -50) {
+			Destroy (this);
+		}
 	}
 
 	public void playNoteFail() {
