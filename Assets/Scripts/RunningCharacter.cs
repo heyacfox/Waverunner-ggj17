@@ -5,7 +5,7 @@ using UnityEngine;
 public class RunningCharacter : MonoBehaviour {
 
 	Rigidbody2D rb2d;
-	public float jumpHeight;
+	public float jumpStrength;
 	public BeatManager bm;
 	bool jumping = true;
 
@@ -16,10 +16,14 @@ public class RunningCharacter : MonoBehaviour {
 	}
 
 	void Update() {
-		if (Input.GetKeyDown ("space") && !jumping) {
-			bm.checkIfPoint ();
+		if (Input.GetKey ("space") && !jumping) {
+			//bm.checkIfPoint ();
 			jumping = true;
-			rb2d.velocity = new Vector2 (0, jumpHeight);
+			rb2d.velocity = new Vector2 (0, jumpStrength);
+			rb2d.gravityScale = 0;
+		}
+		if (Input.GetKeyUp ("space")) {
+			rb2d.gravityScale = 1;
 		}
 	}
 
