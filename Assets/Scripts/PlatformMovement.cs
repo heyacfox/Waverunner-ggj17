@@ -20,12 +20,14 @@ public class PlatformMovement : MonoBehaviour {
 		noteToAudioList = new Dictionary<string, List<AudioClip>> ();
 		noteToAudioList.Add ("C", cMelodies);
 		noteToAudioList.Add ("C#", cSharpMelodies);
+		asource = this.GetComponent<AudioSource> ();
 
 	}
 
 	public void playNote() {
 		List<AudioClip> selecterList = noteToAudioList [selfNote];
 		asource.clip = selecterList [Random.Range (0, selecterList.Count)];
+		//asource.clip = selecterList [0];
 		asource.Play ();
 
 	}

@@ -21,6 +21,7 @@ public class BeatManager : MonoBehaviour {
 	AudioSource asource;
 	public PlatformSpawner ps;
 	public Queue<string> chordNoteProgression;
+	public float realTimeScale;
 
 
 	// Use this for initialization
@@ -31,6 +32,7 @@ public class BeatManager : MonoBehaviour {
 		beatTimerWN = beatTimerQN * 4;
 		pointText.text = points.ToString();
 		asource = this.GetComponent<AudioSource> ();
+		Time.timeScale = realTimeScale;
 
 
 		//setting up chord progression
