@@ -20,6 +20,7 @@ public class BeatManager : MonoBehaviour {
 	public AudioClip backingTrack;
 	AudioSource asource;
 	public PlatformSpawner ps;
+	public Queue<string> chordNoteProgression;
 
 
 	// Use this for initialization
@@ -30,6 +31,13 @@ public class BeatManager : MonoBehaviour {
 		beatTimerWN = beatTimerQN * 4;
 		pointText.text = points.ToString();
 		asource = this.GetComponent<AudioSource> ();
+
+
+		//setting up chord progression
+		chordNoteProgression = new Queue<string>();
+		chordNoteProgression.Enqueue ("C");
+		chordNoteProgression.Enqueue ("C#");
+
 
 
 
@@ -48,8 +56,11 @@ public class BeatManager : MonoBehaviour {
 	public void checkToPlayBackingThenPlay() {
 		if (!asource.isPlaying) {
 			StartCoroutine (PeriodicUpdater(beatTimerWN));
+			string cnp = chordNoteProgression.Dequeue ();
+			chordNoteProgression.Enqueue (cnp);
 			asource.clip = backingTrack;
 			asource.Play ();
+
 		}
 	}
 
@@ -70,7 +81,9 @@ public class BeatManager : MonoBehaviour {
 			if (Time.time >= curTime + beatTimerToTrack) {
 				//Debug.Log ("Do something based on timer");
 				curTime += beatTimerToTrack;
-				ps.spawnPlatform ();
+				string nextNote = chordNoteProgression.Dequeue ();
+				ps.spawnPlatform (nextNote);
+				chordNoteProgression.Enqueue (nextNote);
 				pointGainedThisBeat = false;
 			}
 			yield return new WaitForFixedUpdate ();
