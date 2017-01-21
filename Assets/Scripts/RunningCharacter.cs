@@ -6,6 +6,7 @@ public class RunningCharacter : MonoBehaviour {
 
 	Rigidbody2D rb2d;
 	public float jumpHeight;
+	public BeatManager bm;
 
 	void Awake() {
 		rb2d = this.GetComponent<Rigidbody2D> ();
@@ -15,7 +16,7 @@ public class RunningCharacter : MonoBehaviour {
 
 	void Update() {
 		if (Input.GetKeyDown ("space")) {
-			Debug.Log ("Pressed");
+			bm.checkIfPoint ();
 			rb2d.velocity = new Vector2 (0, jumpHeight);
 		}
 	}
