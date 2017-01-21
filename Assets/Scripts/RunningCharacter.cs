@@ -12,6 +12,7 @@ public class RunningCharacter : MonoBehaviour {
 	public float gravityActual;
 	PlatformMovement linkedPM;
 	public bool inputTypeSpace;
+	public NoteWatcher nw;
 
 	void Awake() {
 		rb2d = this.GetComponent<Rigidbody2D> ();
@@ -21,22 +22,24 @@ public class RunningCharacter : MonoBehaviour {
 	}
 
 	void Update() {
-		if (validateInput() && !jumping) {
-			//bm.checkIfPoint ();
-			if (bm.checkIfPoint()) {
-				jumping = true;
-				linkedPM.playNoteWin ();
-				this.GetComponent<BoxCollider2D> ().enabled = false;
-				rb2d.velocity = new Vector2 (0, jumpStrength);
-				rb2d.gravityScale = 0;
-			} else {
-				linkedPM.playNoteFail ();
-			}
+		if (inputTypeSpace) {
+			if (validateInput () && !jumping) {
+				//bm.checkIfPoint ();
+				if (bm.checkIfPoint ()) {
+					jumping = true;
+					linkedPM.playNoteWin ();
+					this.GetComponent<BoxCollider2D> ().enabled = false;
+					rb2d.velocity = new Vector2 (0, jumpStrength);
+					rb2d.gravityScale = 0;
+				} else {
+					linkedPM.playNoteFail ();
+				}
 
-		}
-		if (Input.GetKeyUp ("space")) {
-			rb2d.gravityScale = gravityActual;
-			this.GetComponent<BoxCollider2D> ().enabled = true;
+			}
+			if (Input.GetKeyUp ("space")) {
+				rb2d.gravityScale = gravityActual;
+				this.GetComponent<BoxCollider2D> ().enabled = true;
+			}
 		}
 		if (this.transform.position.y <= -15) {
 			SceneManager.LoadScene ("CreditsScene");
@@ -63,8 +66,26 @@ public class RunningCharacter : MonoBehaviour {
 			return Input.GetKeyDown ("space");
 		} else {
 			return false;
-			//MEGACOMPLICATEDCHORDSTUFF
 		}
+	}
+
+	public void midiKeyPressed(int keyDown) {
+		if (!jumping) {
+			if (nw.checkAllKeysOfNote(linkedPM.selfNote)) {
+				jumping = true;
+				linkedPM.playNoteWin ();
+				this.GetComponent<BoxCollider2D> ().enabled = false;
+				rb2d.velocity = new Vector2 (0, jumpStrength);
+				rb2d.gravityScale = 0;
+			} else {
+				linkedPM.playNoteFail ();
+			}
+		}
+	}
+
+	public void allMidiKeysReleased() {
+		rb2d.gravityScale = gravityActual;
+		this.GetComponent<BoxCollider2D> ().enabled = true;
 	}
 	
 
