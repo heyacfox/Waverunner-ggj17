@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlatformSpawner : MonoBehaviour {
 
@@ -8,6 +9,7 @@ public class PlatformSpawner : MonoBehaviour {
 	float spawnTimer;
 	public GameObject largePlatform;
 	public BeatManager bm;
+	public GameObject platformTextFollower;
 
 	void Awake() {
 		
@@ -42,6 +44,9 @@ public class PlatformSpawner : MonoBehaviour {
 		pm.GetComponent<Rigidbody2D>().velocity = new Vector2(bm.beatTimerWN * -10f, 0);
 		pm.transform.localScale = new Vector3 (Random.value * 1f + 1f, 1, 1);
 		pm.selfNote = noteToSpawn;
+		//GameObject ptfo = Instantiate (platformTextFollower, Vector2.zero, Quaternion.identity) as GameObject;
+		//ptfo.GetComponent<PlatformTextFollower> ().platformToFollow = go.transform;
+		//tfo.GetComponent<GUIText> ().text = bm.chordNoteProgression.Peek();
 
 	}
 

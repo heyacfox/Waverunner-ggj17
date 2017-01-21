@@ -31,6 +31,11 @@ public class NoteWatcher : MonoBehaviour {
 
 		chordToKeys = new Dictionary<string, List<string>>();
 
+
+
+		List<string> newStrings = new List<string> ();
+		newStrings.Add ("C#");
+
 		keysCurrentlyPressed = new List<int> ();
 
 

@@ -11,8 +11,10 @@ public class RunningCharacter : MonoBehaviour {
 	bool jumping = true;
 	public float gravityActual;
 	PlatformMovement linkedPM;
+	public string nextNoteToHit;
 	public bool inputTypeSpace;
 	public NoteWatcher nw;
+	public GUIText nextNoteText;
 
 	void Awake() {
 		rb2d = this.GetComponent<Rigidbody2D> ();
@@ -49,6 +51,8 @@ public class RunningCharacter : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D col) {
 		if (col.gameObject.tag == "audioblock") {
 			linkedPM = col.gameObject.GetComponent<PlatformMovement> ();
+			nextNoteToHit = bm.chordNoteProgression.Peek();
+			nextNoteText.text = nextNoteToHit;
 			bm.checkToPlayBackingThenPlay ();
 			/*
 			if (bm.checkIfPoint ()) {

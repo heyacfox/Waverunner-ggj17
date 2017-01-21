@@ -10,6 +10,8 @@ public class BeatManager : MonoBehaviour {
 	public float beatTimerStartQuarterNote;
 	float beatTimerQN;
 	float beatTimerHN;
+	float beatTimerDHPDQ;
+	float beatTimerEPW;
 	public float beatTimerWN;
 	float beatTimerEN;
 	public float acceptableVariance;
@@ -29,12 +31,15 @@ public class BeatManager : MonoBehaviour {
 	// 0.5 - Eighth note
 	// (measures amount of time to the enxt note)
 	public float realTimeScale;
+	public RunningCharacter rc;
 
 
 	// Use this for initialization
 	void Start () {
 		beatTimerQN = beatTimerStartQuarterNote;
 		beatTimerEN = beatTimerQN / 2;
+		beatTimerDHPDQ = beatTimerQN * 3.5f;
+		beatTimerEPW = beatTimerQN * 4.5f;
 		beatTimerHN = beatTimerQN * 2;
 		beatTimerWN = beatTimerQN * 4;
 		pointText.text = points.ToString();
@@ -44,6 +49,7 @@ public class BeatManager : MonoBehaviour {
 
 		//setting up chord progression
 		chordNoteProgression = new Queue<string>();
+		/*
 		chordNoteProgression.Enqueue ("C#");
 		chordNoteProgression.Enqueue ("C");
 
@@ -54,8 +60,38 @@ public class BeatManager : MonoBehaviour {
 
 		//chordNoteProgression.Enqueue ("E");
 		chordNoteProgression.Enqueue ("C");
+		*/
+
+		chordNoteProgression.Enqueue("CSmin9");
+		chordNoteProgression.Enqueue("Cmaj7");
+		chordNoteProgression.Enqueue("Amaj7");
+		chordNoteProgression.Enqueue("GSm7");
+		chordNoteProgression.Enqueue("CSmin9");
+		chordNoteProgression.Enqueue("Cmaj7");
+		chordNoteProgression.Enqueue("Dmaj9");
+		chordNoteProgression.Enqueue("Emaj9");
+		chordNoteProgression.Enqueue("CSmin9");
+		chordNoteProgression.Enqueue("Cmaj7");
+		chordNoteProgression.Enqueue("Amaj7");
+		chordNoteProgression.Enqueue("GSm7");
+		chordNoteProgression.Enqueue("CSmin9");
+		chordNoteProgression.Enqueue("Cmaj7");
+		chordNoteProgression.Enqueue("Dmaj9");
+		chordNoteProgression.Enqueue("Emaj9");
+		chordNoteProgression.Enqueue("CSmin9");
+		chordNoteProgression.Enqueue("Cmaj7");
+		chordNoteProgression.Enqueue("Amaj7");
+		chordNoteProgression.Enqueue("GSm7");
+		chordNoteProgression.Enqueue("CSmin9");
+		chordNoteProgression.Enqueue("Cmaj7");
+		chordNoteProgression.Enqueue("D#min7b5");
+		chordNoteProgression.Enqueue("F#min7");
+		chordNoteProgression.Enqueue("G#maj");
+		chordNoteProgression.Enqueue("Emaj7#5");
+		chordNoteProgression.Enqueue("CSmin9");
 
 		chordChangeTimings = new Queue<float> ();
+		/*
 		chordChangeTimings.Enqueue (beatTimerWN);
 		chordChangeTimings.Enqueue (beatTimerWN);
 		chordChangeTimings.Enqueue (beatTimerWN);
@@ -63,6 +99,35 @@ public class BeatManager : MonoBehaviour {
 		chordChangeTimings.Enqueue (beatTimerWN);
 		chordChangeTimings.Enqueue (beatTimerWN);
 		chordChangeTimings.Enqueue (beatTimerWN);
+		*/
+
+		chordChangeTimings.Enqueue(beatTimerDHPDQ);
+		chordChangeTimings.Enqueue(beatTimerWN);
+		chordChangeTimings.Enqueue(beatTimerDHPDQ);
+		chordChangeTimings.Enqueue(beatTimerWN);
+		chordChangeTimings.Enqueue(beatTimerDHPDQ);
+		chordChangeTimings.Enqueue(beatTimerWN);
+		chordChangeTimings.Enqueue(beatTimerDHPDQ);
+		chordChangeTimings.Enqueue(beatTimerWN);
+		chordChangeTimings.Enqueue(beatTimerDHPDQ);
+		chordChangeTimings.Enqueue(beatTimerWN);
+		chordChangeTimings.Enqueue(beatTimerDHPDQ);
+		chordChangeTimings.Enqueue(beatTimerWN);
+		chordChangeTimings.Enqueue(beatTimerDHPDQ);
+		chordChangeTimings.Enqueue(beatTimerWN);
+		chordChangeTimings.Enqueue(beatTimerDHPDQ);
+		chordChangeTimings.Enqueue(beatTimerWN);
+		chordChangeTimings.Enqueue(beatTimerHN);
+		chordChangeTimings.Enqueue(beatTimerHN);
+		chordChangeTimings.Enqueue(beatTimerHN);
+		chordChangeTimings.Enqueue(beatTimerHN);
+		chordChangeTimings.Enqueue(beatTimerDHPDQ);
+		chordChangeTimings.Enqueue(beatTimerWN);
+		chordChangeTimings.Enqueue(beatTimerDHPDQ);
+		chordChangeTimings.Enqueue(beatTimerWN);
+		chordChangeTimings.Enqueue(beatTimerDHPDQ);
+		chordChangeTimings.Enqueue(beatTimerDHPDQ);
+		chordChangeTimings.Enqueue(beatTimerHN);
 
 
 
@@ -118,6 +183,7 @@ public class BeatManager : MonoBehaviour {
 				curTime += nextChange;
 				chordChangeTimings.Enqueue (nextChange);
 				string nextNote = chordNoteProgression.Dequeue ();
+
 				ps.spawnPlatforms (nextNote);
 				chordNoteProgression.Enqueue (nextNote);
 
