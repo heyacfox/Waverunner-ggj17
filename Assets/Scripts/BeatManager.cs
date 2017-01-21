@@ -86,7 +86,7 @@ public class BeatManager : MonoBehaviour {
 		chordNoteProgression.Enqueue("Cmaj7");
 		chordNoteProgression.Enqueue("DSmin7b5");
 		chordNoteProgression.Enqueue("FSmin7");
-		chordNoteProgression.Enqueue("G#maj");
+		chordNoteProgression.Enqueue("GS");
 		chordNoteProgression.Enqueue("Emaj7S5");
 		chordNoteProgression.Enqueue("CSmin9");
 
