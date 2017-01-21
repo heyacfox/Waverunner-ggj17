@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RunningCharacter : MonoBehaviour {
 
@@ -28,6 +29,9 @@ public class RunningCharacter : MonoBehaviour {
 		if (Input.GetKeyUp ("space")) {
 			rb2d.gravityScale = gravityActual;
 			this.GetComponent<BoxCollider2D> ().enabled = true;
+		}
+		if (this.transform.position.y <= -15) {
+			SceneManager.LoadScene ("CreditsScene");
 		}
 	}
 
