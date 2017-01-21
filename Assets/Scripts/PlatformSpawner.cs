@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class PlatformSpawner : MonoBehaviour {
 
-	float timeLeft = 6;
+	public float spawnTimerStart;
+	float spawnTimer;
 	public GameObject largePlatform;
+
+	void Awake() {
+		spawnTimer = spawnTimerStart;
+	}
 
 	// Update is called once per frame
 	void Update () {
 
-		timeLeft -= Time.deltaTime;
-		if (timeLeft < 0) {
+		spawnTimer -= Time.deltaTime;
+		if (spawnTimer < 0) {
 			
-			timeLeft = 10;
+			spawnTimer = spawnTimerStart;
 			Instantiate (largePlatform, new Vector3 (5, -2 + Random.value), Quaternion.identity);
 		}
 	}
