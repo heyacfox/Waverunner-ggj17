@@ -5,13 +5,8 @@ using MidiJack;
 //using MidiJack.MidiMaster;
 
 public class MidiInputManager : MonoBehaviour {
-
-	//MidiMaster mmas = new MidiMaster();
-	MidiChannel mc = new MidiChannel ();
 	//MidiMaster.GetKey(20);
-
-
-
+	//MidiMaster.GetKey(20);
 
 
 
