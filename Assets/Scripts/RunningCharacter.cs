@@ -31,7 +31,11 @@ public class RunningCharacter : MonoBehaviour {
 		if (col.gameObject.tag == "audioblock") {
 			PlatformMovement pm = col.gameObject.GetComponent<PlatformMovement> ();
 			bm.checkToPlayBackingThenPlay ();
-			pm.playNote ();
+			if (bm.checkIfPoint ()) {
+				pm.playNoteWin ();
+			} else {
+				pm.playNoteFail ();
+			}
 			jumping = false;
 		}
 	}

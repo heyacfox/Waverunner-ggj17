@@ -45,13 +45,18 @@ public class BeatManager : MonoBehaviour {
 
 	}
 
-	public void checkIfPoint() {
+	public bool checkIfPoint() {
 		if (!pointGainedThisBeat) {
-			if (activeTime - acceptableVariance <= 0 || 
-				activeTime + acceptableVariance >= currentBeatTimeTracking) {
+			if (activeTime - acceptableVariance <= 0 ||
+			    activeTime + acceptableVariance >= currentBeatTimeTracking) {
 				points++;
-				pointText.text = points.ToString();
+				pointText.text = points.ToString ();
+				return true;
+			} else {
+				return false;
 			}
+		} else {
+			return false;
 		}
 	}
 

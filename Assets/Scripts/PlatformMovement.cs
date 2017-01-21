@@ -24,11 +24,17 @@ public class PlatformMovement : MonoBehaviour {
 
 	}
 
-	public void playNote() {
+	public void playNoteWin() {
 		List<AudioClip> selecterList = noteToAudioList [selfNote];
-		asource.clip = selecterList [Random.Range (0, selecterList.Count)];
+		asource.clip = selecterList [Random.Range (1, selecterList.Count)];
 		//asource.clip = selecterList [0];
 		asource.Play ();
 
+	}
+
+	public void playNoteFail() {
+		List<AudioClip> selecterList = noteToAudioList [selfNote];
+		asource.clip = selecterList [0];
+		asource.Play ();
 	}
 }
