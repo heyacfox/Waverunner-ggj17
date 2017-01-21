@@ -10,6 +10,7 @@ public class NoteCheck : MonoBehaviour {
 
 	void Update() {
 		if (MidiMaster.GetKeyDown (noteToCheck)) {
+			Debug.Log ("KeyDownHappened with" + noteToCheck.ToString());
 			nw.anyKeyDown (noteToCheck);
 		}
 		if (MidiMaster.GetKeyUp (noteToCheck)) {

@@ -34,12 +34,13 @@ public class NoteWatcher : MonoBehaviour {
 		keysCurrentlyPressed = new List<int> ();
 
 
-		//Spawn 128 note watchers.
+		//Spawn 128 note checkers.
 
 		for (int i = 0; i < 128; i++) {
 			GameObject go = Instantiate (noteCheckSpawnPrefab, noteSpawnHeader) as GameObject;
-			go.GetComponent<NoteCheck> ().nw = this;
-			go.GetComponent<NoteCheck> ().noteToCheck = i;
+			NoteCheck nc = go.GetComponent<NoteCheck> ();
+			nc.nw = this;
+			nc.noteToCheck = i;
 		}
 
 	}
@@ -56,10 +57,14 @@ public class NoteWatcher : MonoBehaviour {
 	}
 
 	public void anyKeyUp(int keyUp) {
+		
 		keysCurrentlyPressed.Remove (keyUp);
+
 		if (keysCurrentlyPressed.Count == 0) {
 			rc.allMidiKeysReleased ();
 		}
+
+
 	}
 
 	public bool checkAnyKeyInChord(string chord) {
@@ -98,6 +103,7 @@ public class NoteWatcher : MonoBehaviour {
 			if (checkOneKey (rotatingCheck)) {
 				return true;
 			}
+			rotatingCheck++;
 		}
 		return false;
 	}
