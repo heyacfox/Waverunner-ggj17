@@ -130,7 +130,7 @@ public class BeatManager : MonoBehaviour {
 		chordChangeTimings.Enqueue(beatTimerHN);
 
 
-
+		rc.nextNoteText.text = this.chordNoteProgression.Peek ();
 
 
 	}

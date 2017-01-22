@@ -30,6 +30,7 @@ public class RunningCharacter : MonoBehaviour {
 			inputTypeSpace = false;
 		}
 		NoteWatcher.instance.rc = this;
+		//this.nextNoteText.text = bm.chordNoteProgression.Peek ();
 
 	}
 
