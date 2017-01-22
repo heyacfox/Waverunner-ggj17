@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class RunningCharacter : MonoBehaviour {
 
@@ -14,9 +15,10 @@ public class RunningCharacter : MonoBehaviour {
 	public string nextNoteToHit;
 	public bool inputTypeSpace;
 	public NoteWatcher nw;
-	public GUIText nextNoteText;
+	public Text nextNoteText;
 
 	public RuntimeAnimatorController CMO_anim;
+	public RuntimeAnimatorController CWY_anim;
 
 	void Awake() {
 		rb2d = this.GetComponent<Rigidbody2D> ();
@@ -46,7 +48,7 @@ public class RunningCharacter : MonoBehaviour {
 
 	void setCharacterAnimatorController() {
 
-		float oldPoints = 0.99f;
+		float oldPoints = 0.27f;
 		float genderPoints = 0.42f;
 		Animator anim = this.GetComponent<Animator> ();
 
@@ -66,7 +68,7 @@ public class RunningCharacter : MonoBehaviour {
 			checkVal = Random.value;
 			Debug.Log ("YoungWomanPoints:" + checkVal.ToString ());
 			if (Random.value < genderPoints) {
-				//add young woman
+				anim.runtimeAnimatorController = CWY_anim;
 			} else {
 				// add young man do nothing
 			}
