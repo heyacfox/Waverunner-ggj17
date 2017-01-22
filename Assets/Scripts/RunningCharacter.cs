@@ -64,9 +64,9 @@ public class RunningCharacter : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D col) {
 		if (col.gameObject.tag == "audioblock") {
 			linkedPM = col.gameObject.GetComponent<PlatformMovement> ();
-			nextNoteText.text = nextNoteToHit;
+			//nextNoteText.text = nextNoteToHit;
 			bm.checkToPlayBackingThenPlay ();
-			nextNoteToHit = bm.chordNoteProgression.Peek();
+			//nextNoteToHit = bm.chordNoteProgression.Peek();
 			/*
 			if (bm.checkIfPoint ()) {
 				pm.playNoteWin ();
@@ -90,7 +90,7 @@ public class RunningCharacter : MonoBehaviour {
 		Debug.Log ("Input Type Space Value:" + inputTypeSpace.ToString ());
 		if (!inputTypeSpace) {
 			if (!jumping) {
-				if (nw.checkAnyKeyInChord (linkedPM.selfNote)) {
+				if (nw.checkAnyKeyInChord (bm.currentChord)) {
 					jumping = true;
 					linkedPM.playNoteWin ();
 					this.GetComponent<BoxCollider2D> ().enabled = false;

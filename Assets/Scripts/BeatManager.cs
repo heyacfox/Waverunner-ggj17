@@ -32,6 +32,7 @@ public class BeatManager : MonoBehaviour {
 	// (measures amount of time to the enxt note)
 	public float realTimeScale;
 	public RunningCharacter rc;
+	public string currentChord;
 
 
 	// Use this for initialization
@@ -153,9 +154,12 @@ public class BeatManager : MonoBehaviour {
 	public void checkToPlayBackingThenPlay() {
 		if (!asource.isPlaying) {
 			float nextChange = chordChangeTimings.Dequeue ();
+
 			chordChangeTimings.Enqueue (nextChange);
 			StartCoroutine (PeriodicUpdater(nextChange));
 			string cnp = chordNoteProgression.Dequeue ();
+			currentChord = cnp;
+			rc.nextNoteText.text = cnp;
 			chordNoteProgression.Enqueue (cnp);
 			asource.clip = backingTrack;
 			asource.Play ();
@@ -175,7 +179,7 @@ public class BeatManager : MonoBehaviour {
 		while (true) {
 			//Debug.Log (Time.time.ToString ());
 			float timeText = curTime + beatTimerToTrack - Time.time;
-			beatText.text = timeText.ToString ();
+			//beatText.text = timeText.ToString ();
 			activeTime = timeText;
 			if (Time.time >= curTime + beatTimerToTrack) {
 				//Debug.Log ("Do something based on timer");
@@ -183,7 +187,8 @@ public class BeatManager : MonoBehaviour {
 				curTime += nextChange;
 				chordChangeTimings.Enqueue (nextChange);
 				string nextNote = chordNoteProgression.Dequeue ();
-
+				currentChord = nextNote;
+				rc.nextNoteText.text = currentChord;
 				ps.spawnPlatforms (nextNote, nextChange);
 				chordNoteProgression.Enqueue (nextNote);
 
