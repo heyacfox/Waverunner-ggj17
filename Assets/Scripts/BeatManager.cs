@@ -218,6 +218,7 @@ public class BeatManager : MonoBehaviour {
 				chordChangeTimings.Enqueue (nextChange);
 				string nextNote = chordNoteProgression.Dequeue ();
 				if (nextNote.Equals("FINAL")) {
+					InputChecker.instance.winHuh = true;
 					SceneManager.LoadScene("CreditsScene");
 				}
 				currentChord = nextNote;

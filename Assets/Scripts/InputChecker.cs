@@ -6,6 +6,7 @@ using MidiJack;
 public class InputChecker : MonoBehaviour {
 	public static InputChecker instance = null;
 	public bool inputTypeSpaceHuh;
+	public bool winHuh;
 
 	void Awake() {
 		if (instance == null) {
