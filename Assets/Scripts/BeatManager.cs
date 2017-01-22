@@ -184,7 +184,7 @@ public class BeatManager : MonoBehaviour {
 				chordChangeTimings.Enqueue (nextChange);
 				string nextNote = chordNoteProgression.Dequeue ();
 
-				ps.spawnPlatforms (nextNote);
+				ps.spawnPlatforms (nextNote, nextChange);
 				chordNoteProgression.Enqueue (nextNote);
 
 

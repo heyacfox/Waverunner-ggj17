@@ -61,9 +61,9 @@ public class RunningCharacter : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D col) {
 		if (col.gameObject.tag == "audioblock") {
 			linkedPM = col.gameObject.GetComponent<PlatformMovement> ();
-			nextNoteToHit = bm.chordNoteProgression.Peek();
 			nextNoteText.text = nextNoteToHit;
 			bm.checkToPlayBackingThenPlay ();
+			nextNoteToHit = bm.chordNoteProgression.Peek();
 			/*
 			if (bm.checkIfPoint ()) {
 				pm.playNoteWin ();
