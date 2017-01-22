@@ -20,11 +20,16 @@ public class RunningCharacter : MonoBehaviour {
 		rb2d = this.GetComponent<Rigidbody2D> ();
 		rb2d.velocity = new Vector2 (0, 0);
 		rb2d.gravityScale = gravityActual;
-		if (InputChecker.instance.inputTypeSpaceHuh) {
-			inputTypeSpace = true;
+		if (InputChecker.instance != null) {
+			if (InputChecker.instance.inputTypeSpaceHuh) {
+				inputTypeSpace = true;
+			} else {
+				inputTypeSpace = false;
+			}
 		} else {
 			inputTypeSpace = false;
 		}
+		NoteWatcher.instance.rc = this;
 
 	}
 
@@ -79,6 +84,7 @@ public class RunningCharacter : MonoBehaviour {
 	}
 
 	public void midiKeyPressed(int keyDown) {
+		Debug.Log ("Input Type Space Value:" + inputTypeSpace.ToString ());
 		if (!inputTypeSpace) {
 			if (!jumping) {
 				if (nw.checkAnyKeyInChord (linkedPM.selfNote)) {

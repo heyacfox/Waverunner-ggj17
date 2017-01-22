@@ -6,6 +6,8 @@ using MidiJack;
 public class NoteWatcher : MonoBehaviour {
 
 	//public int noteNumber;
+
+	public static NoteWatcher instance = null;
 	public Transform noteSpawnHeader;
 	public GameObject noteCheckSpawnPrefab;
 	public RunningCharacter rc;
@@ -15,6 +17,14 @@ public class NoteWatcher : MonoBehaviour {
 	Dictionary<string, List<string>> chordToKeys;
 
 	void Awake() {
+
+		if (instance == null) {
+			instance = this;
+		} else {
+			Destroy (this.gameObject);
+		}
+		DontDestroyOnLoad (this.gameObject);
+
 		noteToStartKey = new Dictionary<string, int> ();
 		noteToStartKey.Add ("C", 0);
 		noteToStartKey.Add ("C#", 1);
@@ -113,6 +123,19 @@ public class NoteWatcher : MonoBehaviour {
 			nc.noteToCheck = i;
 		}
 
+		if (rc != null) {
+			rc.allMidiKeysReleased ();
+		}
+	}
+
+	void Update() {
+		//bool topcheck = false;
+		for (int i = 0; i < 128; i++) {
+			if (MidiDriver.Instance.GetKeyDown(MidiChannel.All, i)) {
+				Debug.Log ("KEYPRESSED");
+				//topcheck = true;
+			}
+		}
 	}
 
 	public bool checkOneKey(int key) {
@@ -123,16 +146,25 @@ public class NoteWatcher : MonoBehaviour {
 	public void anyKeyDown(int keyDown) {
 		Debug.Log ("Key Pressed!:" + keyDown.ToString ());
 		keysCurrentlyPressed.Add (keyDown);
-		rc.midiKeyPressed (keyDown);
+		if (rc != null) {
+			rc.midiKeyPressed (keyDown);
+		}
 	}
 
 	public void anyKeyUp(int keyUp) {
 		
 		keysCurrentlyPressed.Remove (keyUp);
 
-		if (keysCurrentlyPressed.Count == 0) {
+		if (rc != null) {
 			rc.allMidiKeysReleased ();
 		}
+		/*
+		if (keysCurrentlyPressed.Count == 0) {
+			if (rc != null) {
+				rc.allMidiKeysReleased ();
+			}
+		}
+		*/
 
 
 	}

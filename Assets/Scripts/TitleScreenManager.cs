@@ -21,11 +21,13 @@ public class TitleScreenManager : MonoBehaviour {
 			InputChecker.instance.inputTypeSpaceHuh = true;
 			SceneManager.LoadScene (sceneToLoad);
 		}
+
 		for (int i = 0; i < 128; i++) {
 			if (MidiMaster.GetKeyDown (i)) {
 				InputChecker.instance.inputTypeSpaceHuh = false;
 				SceneManager.LoadScene (sceneToLoad);
 			}
 		}
+
 	}
 }

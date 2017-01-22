@@ -11,9 +11,9 @@ public class InputChecker : MonoBehaviour {
 		if (instance == null) {
 			instance = this;
 		} else {
-			Destroy (this);
+			Destroy (this.gameObject);
 		}
-		DontDestroyOnLoad (this);
+		DontDestroyOnLoad (this.gameObject);
 	}
 
 }
