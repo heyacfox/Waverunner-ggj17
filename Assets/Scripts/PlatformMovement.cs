@@ -22,6 +22,8 @@ public class PlatformMovement : MonoBehaviour {
 	public string selfNote;
 	AudioSource asource;
 
+	public GameObject tileSprite;
+
 
 
 	void Awake() {
@@ -56,7 +58,42 @@ public class PlatformMovement : MonoBehaviour {
 		}
 		*/
 		asource = this.GetComponent<AudioSource> ();
+		/*
+		SpriteRenderer sprite;
+		sprite = GetComponent<SpriteRenderer> ();
+		Vector2 spriteSize = new Vector2 (sprite.bounds.size.x / transform.localScale.x, 
+			sprite.bounds.size.y / transform.localScale.y);
+		GameObject childPrefab = new GameObject ();
+		SpriteRenderer childSprite = childPrefab.AddComponent<SpriteRenderer> ();
+		childSprite.sprite = tileSprite.GetComponent<SpriteRenderer> ().sprite;
 
+
+		GameObject child;
+		for (int i = 1, l = (int)Mathf.Round (sprite.bounds.size.y); i < l; i++) {
+			child = Instantiate (childPrefab) as GameObject;
+			child.transform.position = transform.position - (new Vector3(0, spriteSize.y, 0) * i);
+			child.transform.parent = transform;
+		}
+		childPrefab.transform.parent = transform;
+		*/
+		generateTileSprites ();
+
+	}
+
+	public void generateTileSprites() {
+		SpriteRenderer sprite = GetComponent<SpriteRenderer> ();
+		float spriteXSize = sprite.bounds.size.x;
+		SpriteRenderer tileSpriteRenderer = tileSprite.GetComponent<SpriteRenderer> ();
+		float tileXSize = tileSpriteRenderer.bounds.size.x;
+		Vector3 posCheck = sprite.bounds.center - new Vector3((spriteXSize / 2), 0, 0);
+		float spriteLeftLocation = posCheck.x;
+		float startSize = 0;
+		while (startSize < spriteXSize) {
+			GameObject childSprite = Instantiate (tileSprite, this.transform);
+			childSprite.transform.position = new Vector2 (spriteLeftLocation, this.transform.position.y);
+			spriteLeftLocation += tileXSize;
+			startSize += tileXSize;
+		}
 	}
 
 	public void playNoteWin() {
