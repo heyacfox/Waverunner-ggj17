@@ -175,7 +175,7 @@ public class RunningCharacter : MonoBehaviour {
 	}
 
 	bool validateInput() {
-		if (inputTypeSpace) {
+		if (inputTypeSpace && rb2d.velocity.y == 0) {
 			return Input.GetKeyDown ("space");
 		} else {
 			return false;
@@ -184,7 +184,7 @@ public class RunningCharacter : MonoBehaviour {
 
 	public void midiKeyPressed(int keyDown) {
 		Debug.Log ("Input Type Space Value:" + inputTypeSpace.ToString ());
-		if (!inputTypeSpace) {
+		if (!inputTypeSpace && rb2d.velocity.y == 0) {
 			if (!jumping) {
 				if (nw.checkAnyKeyInChord (bm.currentChord)) {
 					jumping = true;

@@ -7,6 +7,7 @@ public class InputChecker : MonoBehaviour {
 	public static InputChecker instance = null;
 	public bool inputTypeSpaceHuh;
 	public bool winHuh;
+	public float platformSizeMultiplier;
 
 	void Awake() {
 		if (instance == null) {

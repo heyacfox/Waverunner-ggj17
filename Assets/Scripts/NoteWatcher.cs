@@ -127,6 +127,7 @@ public class NoteWatcher : MonoBehaviour {
 			rc.allMidiKeysReleased ();
 		}
 	}
+		
 
 	void Update() {
 		//bool topcheck = false;
@@ -150,7 +151,7 @@ public class NoteWatcher : MonoBehaviour {
 			rc.midiKeyPressed (keyDown);
 		}
 		if (TitleScreenManager.instance != null) {
-			TitleScreenManager.instance.goWithMIDI ();
+			TitleScreenManager.instance.goWithMIDI (keyDown);
 		}
 	}
 

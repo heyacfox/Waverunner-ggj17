@@ -33,6 +33,7 @@ public class TitleScreenManager : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown ("space")) {
 			InputChecker.instance.inputTypeSpaceHuh = true;
+			InputChecker.instance.platformSizeMultiplier = 0.5f;
 			SceneManager.LoadScene (sceneToLoad);
 		}
 		/*
@@ -46,8 +47,20 @@ public class TitleScreenManager : MonoBehaviour {
 
 	}
 
-	public void goWithMIDI() {
+	public void goWithMIDI(int keyDown) {
 		InputChecker.instance.inputTypeSpaceHuh = false;
+		InputChecker.instance.platformSizeMultiplier = keyToDifficulty(keyDown);
 		SceneManager.LoadScene (sceneToLoad);
+	}
+
+	float keyToDifficulty(int keyDown) {
+		
+		float moduloResult = keyDown % 12;
+		Debug.Log ("Modulo" + moduloResult.ToString ());
+		float calculatedPercent = (moduloResult) / 12;
+		Debug.Log ("Percent" + calculatedPercent.ToString());
+		float finalResult = 0.3f + (calculatedPercent * 0.5f);
+		Debug.Log ("Result" + finalResult.ToString());
+		return finalResult;
 	}
 }
