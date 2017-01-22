@@ -141,7 +141,7 @@ public class RunningCharacter : MonoBehaviour {
 			}
 		}
 		if (this.transform.position.y <= -15 || this.transform.position.x <= -15) {
-			SceneManager.LoadScene ("CreditsScene");
+			bm.StartCoroutine("EndSceneRoutine", "CreditsScene");
 		}
 		if (this.transform.position.y > 4) {
 			characterFalls ();
@@ -158,6 +158,7 @@ public class RunningCharacter : MonoBehaviour {
 		if (col.gameObject.tag == "audioblock") {
 			linkedPM = col.gameObject.GetComponent<PlatformMovement> ();
 			//nextNoteText.text = nextNoteToHit;
+
 			this.GetComponent<Animator> ().SetTrigger ("land");
 			//Profiler.EndSample ("SceneSwap");	
 

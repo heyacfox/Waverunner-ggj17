@@ -36,7 +36,28 @@ public class BeatManager : MonoBehaviour {
 	public string currentChord;
 	public Transform chordPanel;
 	public Text chordTextPrefab;
+	public Image FadeImg;
+	public float fadeSpeed = 1.5f;
 
+
+	void FadeToBlack()
+	{
+		FadeImg.color = Color.Lerp (FadeImg.color, Color.black, fadeSpeed * Time.deltaTime);
+	}
+
+	public IEnumerator EndSceneRoutine(string sceneName) {
+		FadeImg.enabled = true;
+	
+		do {
+			FadeToBlack ();
+			if (FadeImg.color.a >= 0.95f) {
+				SceneManager.LoadScene (sceneName);
+				yield break;
+			} else {
+				yield return null;
+			}
+		} while (true);
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -49,6 +70,7 @@ public class BeatManager : MonoBehaviour {
 		pointText.text = points.ToString();
 		asource = this.GetComponent<AudioSource> ();
 		Time.timeScale = realTimeScale;
+		FadeImg.rectTransform.localScale = new Vector2 (Screen.width, Screen.height);
 
 
 		//setting up chord progression
@@ -222,7 +244,7 @@ public class BeatManager : MonoBehaviour {
 				string nextNote = chordNoteProgression.Dequeue ();
 				if (nextNote.Equals("FINAL")) {
 					InputChecker.instance.winHuh = true;
-					SceneManager.LoadScene("CreditsScene");
+					StartCoroutine ("EndSceneRoutine", "CreditsScene");
 				}
 				currentChord = nextNote;
 				Destroy(chordPanel.GetChild (0).gameObject);
@@ -238,4 +260,12 @@ public class BeatManager : MonoBehaviour {
 		}
 
 	}
+
+	IEnumerator swapScene() {
+
+
+		yield return null;
+	}
+
+
 }
