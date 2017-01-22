@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BeatManager : MonoBehaviour {
 
@@ -90,6 +91,7 @@ public class BeatManager : MonoBehaviour {
 		chordNoteProgression.Enqueue("GS");
 		chordNoteProgression.Enqueue("Emaj7S5");
 		chordNoteProgression.Enqueue("CSmin9");
+		chordNoteProgression.Enqueue ("FINAL");
 
 		chordChangeTimings = new Queue<float> ();
 		/*
@@ -187,6 +189,9 @@ public class BeatManager : MonoBehaviour {
 				curTime += nextChange;
 				chordChangeTimings.Enqueue (nextChange);
 				string nextNote = chordNoteProgression.Dequeue ();
+				if (nextNote.Equals("FINAL")) {
+					SceneManager.LoadScene("CreditsScene");
+				}
 				currentChord = nextNote;
 				rc.nextNoteText.text = currentChord;
 				ps.spawnPlatforms (nextNote, nextChange);
