@@ -149,6 +149,9 @@ public class NoteWatcher : MonoBehaviour {
 		if (rc != null) {
 			rc.midiKeyPressed (keyDown);
 		}
+		if (TitleScreenManager.instance != null) {
+			TitleScreenManager.instance.goWithMIDI ();
+		}
 	}
 
 	public void anyKeyUp(int keyUp) {

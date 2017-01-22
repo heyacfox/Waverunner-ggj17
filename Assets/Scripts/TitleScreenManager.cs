@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using MidiJack;
+using UnityEngine.Profiling;
 
 public class TitleScreenManager : MonoBehaviour {
 
@@ -13,6 +14,8 @@ public class TitleScreenManager : MonoBehaviour {
 		if (instance == null)
 			instance = this;
 		//DontDestroyOnLoad(this);
+		Profiler.BeginSample("SceneSwap");
+
 	}
 
 	// Update is called once per frame
@@ -21,13 +24,19 @@ public class TitleScreenManager : MonoBehaviour {
 			InputChecker.instance.inputTypeSpaceHuh = true;
 			SceneManager.LoadScene (sceneToLoad);
 		}
-
+		/*
 		for (int i = 0; i < 128; i++) {
 			if (MidiMaster.GetKeyDown (i)) {
 				InputChecker.instance.inputTypeSpaceHuh = false;
 				SceneManager.LoadScene (sceneToLoad);
 			}
 		}
+		*/
 
+	}
+
+	public void goWithMIDI() {
+		InputChecker.instance.inputTypeSpaceHuh = false;
+		SceneManager.LoadScene (sceneToLoad);
 	}
 }

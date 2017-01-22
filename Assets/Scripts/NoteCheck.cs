@@ -9,10 +9,6 @@ public class NoteCheck : MonoBehaviour {
 	public int noteToCheck;
 	public bool verifyCheck = false;
 
-	void Awake() {
-		Debug.Log ("I'M WIDE AWAKE");
-	}
-
 	void Update() {
 		verifyCheck = true;
 		if (noteToCheck == 0) {

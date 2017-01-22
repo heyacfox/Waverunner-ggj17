@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Profiling;
 
 public class RunningCharacter : MonoBehaviour {
 
@@ -111,6 +112,8 @@ public class RunningCharacter : MonoBehaviour {
 			linkedPM = col.gameObject.GetComponent<PlatformMovement> ();
 			//nextNoteText.text = nextNoteToHit;
 			this.GetComponent<Animator> ().SetTrigger ("land");
+			//Profiler.EndSample ("SceneSwap");	
+
 			bm.checkToPlayBackingThenPlay ();
 			//nextNoteToHit = bm.chordNoteProgression.Peek();
 			/*
