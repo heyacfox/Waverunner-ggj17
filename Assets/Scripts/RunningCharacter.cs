@@ -16,6 +16,8 @@ public class RunningCharacter : MonoBehaviour {
 	public NoteWatcher nw;
 	public GUIText nextNoteText;
 
+	public RuntimeAnimatorController CMO_anim;
+
 	void Awake() {
 		rb2d = this.GetComponent<Rigidbody2D> ();
 		rb2d.velocity = new Vector2 (0, 0);
@@ -33,6 +35,44 @@ public class RunningCharacter : MonoBehaviour {
 			NoteWatcher.instance.rc = this;
 		}
 		//this.nextNoteText.text = bm.chordNoteProgression.Peek ();
+
+		this.setCharacterAnimatorController ();
+
+
+
+
+
+	}
+
+	void setCharacterAnimatorController() {
+
+		float oldPoints = 0.99f;
+		float genderPoints = 0.42f;
+		Animator anim = this.GetComponent<Animator> ();
+
+		float checkVal = Random.value;
+		Debug.Log ("OldPoints:" + checkVal.ToString ());
+		if (checkVal < oldPoints) {
+			
+			checkVal = Random.value;
+			Debug.Log ("OldWomanPoints:" + checkVal.ToString ());
+			if (Random.value < genderPoints) {
+				//add old woman
+			} else {
+				anim.runtimeAnimatorController = CMO_anim;
+			}
+
+		} else {
+			checkVal = Random.value;
+			Debug.Log ("YoungWomanPoints:" + checkVal.ToString ());
+			if (Random.value < genderPoints) {
+				//add young woman
+			} else {
+				// add young man do nothing
+			}
+		}
+
+
 
 	}
 
