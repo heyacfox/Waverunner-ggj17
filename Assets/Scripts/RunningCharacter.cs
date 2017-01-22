@@ -45,6 +45,8 @@ public class RunningCharacter : MonoBehaviour {
 					linkedPM.playNoteWin ();
 					this.GetComponent<BoxCollider2D> ().enabled = false;
 					rb2d.velocity = new Vector2 (0, jumpStrength);
+					this.GetComponent<Animator> ().SetTrigger ("jump");
+					this.GetComponent<Animator> ().ResetTrigger ("land");
 					rb2d.gravityScale = 0;
 				} else {
 					linkedPM.playNoteFail ();
@@ -53,6 +55,7 @@ public class RunningCharacter : MonoBehaviour {
 			}
 			if (Input.GetKeyUp ("space")) {
 				rb2d.gravityScale = gravityActual;
+				this.GetComponent<Animator> ().SetTrigger ("fall");
 				this.GetComponent<BoxCollider2D> ().enabled = true;
 			}
 		}
@@ -65,6 +68,7 @@ public class RunningCharacter : MonoBehaviour {
 		if (col.gameObject.tag == "audioblock") {
 			linkedPM = col.gameObject.GetComponent<PlatformMovement> ();
 			//nextNoteText.text = nextNoteToHit;
+			this.GetComponent<Animator> ().SetTrigger ("land");
 			bm.checkToPlayBackingThenPlay ();
 			//nextNoteToHit = bm.chordNoteProgression.Peek();
 			/*
@@ -95,6 +99,8 @@ public class RunningCharacter : MonoBehaviour {
 					linkedPM.playNoteWin ();
 					this.GetComponent<BoxCollider2D> ().enabled = false;
 					rb2d.velocity = new Vector2 (0, jumpStrength);
+					this.GetComponent<Animator> ().SetTrigger ("jump");
+					this.GetComponent<Animator> ().ResetTrigger ("land");
 					rb2d.gravityScale = 0;
 				} else {
 					linkedPM.playNoteFail ();
@@ -107,6 +113,7 @@ public class RunningCharacter : MonoBehaviour {
 		if (!inputTypeSpace) {
 			rb2d.gravityScale = gravityActual;
 			this.GetComponent<BoxCollider2D> ().enabled = true;
+			this.GetComponent<Animator> ().SetTrigger ("fall");
 		}
 	}
 	
