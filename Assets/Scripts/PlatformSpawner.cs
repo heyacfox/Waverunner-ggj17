@@ -40,7 +40,7 @@ public class PlatformSpawner : MonoBehaviour {
 
 	public void spawnPlatform(string noteToSpawn, float heightBegin, float speedWidthOfSpawn) {
 		GameObject go = Instantiate (largePlatform, 
-			new Vector3 (16, heightBegin + (Random.value*2)), 
+			new Vector3 (15, heightBegin + (Random.value*2)), 
 			Quaternion.identity) as GameObject;
 		PlatformMovement pm = go.GetComponent<PlatformMovement> ();
 		pm.GetComponent<Rigidbody2D>().velocity = new Vector2(bm.beatTimerWN * -10f, 0);

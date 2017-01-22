@@ -18,6 +18,7 @@ public class TitleSprite : MonoBehaviour {
 
 	void Awake() {
 		this.setCharacterAnimatorController ();
+		Debug.Log ("TSAWAKE");
 	}
 
 
