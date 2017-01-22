@@ -136,15 +136,22 @@ public class RunningCharacter : MonoBehaviour {
 				}
 
 			}
-			if (Input.GetKeyUp ("space")) {
-				rb2d.gravityScale = gravityActual;
-				this.GetComponent<Animator> ().SetTrigger ("fall");
-				this.GetComponent<BoxCollider2D> ().enabled = true;
+			if (Input.GetKeyUp ("space") || this.transform.position.y > 5) {
+				characterFalls ();
 			}
 		}
 		if (this.transform.position.y <= -15) {
 			SceneManager.LoadScene ("CreditsScene");
 		}
+		if (this.transform.position.y > 4) {
+			characterFalls ();
+		}
+	}
+
+	void characterFalls() {
+		rb2d.gravityScale = gravityActual;
+		this.GetComponent<Animator> ().SetTrigger ("fall");
+		this.GetComponent<BoxCollider2D> ().enabled = true;
 	}
 
 	void OnCollisionEnter2D(Collision2D col) {
@@ -196,9 +203,7 @@ public class RunningCharacter : MonoBehaviour {
 
 	public void allMidiKeysReleased() {
 		if (!inputTypeSpace) {
-			rb2d.gravityScale = gravityActual;
-			this.GetComponent<BoxCollider2D> ().enabled = true;
-			this.GetComponent<Animator> ().SetTrigger ("fall");
+			characterFalls ();
 		}
 	}
 	

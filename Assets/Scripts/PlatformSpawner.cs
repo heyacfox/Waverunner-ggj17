@@ -10,6 +10,7 @@ public class PlatformSpawner : MonoBehaviour {
 	public GameObject largePlatform;
 	public BeatManager bm;
 	public GameObject platformTextFollower;
+	public float spawnBaseSize;
 
 	void Awake() {
 		
@@ -42,7 +43,7 @@ public class PlatformSpawner : MonoBehaviour {
 			Quaternion.identity) as GameObject;
 		PlatformMovement pm = go.GetComponent<PlatformMovement> ();
 		pm.GetComponent<Rigidbody2D>().velocity = new Vector2(bm.beatTimerWN * -10f, 0);
-		pm.transform.localScale = new Vector3 ((Random.value * speedWidthOfSpawn) + .3f, 1, 1);
+		pm.transform.localScale = new Vector3 ((Random.value * speedWidthOfSpawn) + spawnBaseSize, 1, 1);
 		pm.selfNote = noteToSpawn;
 		//GameObject ptfo = Instantiate (platformTextFollower, Vector2.zero, Quaternion.identity) as GameObject;
 		//ptfo.GetComponent<PlatformTextFollower> ().platformToFollow = go.transform;
