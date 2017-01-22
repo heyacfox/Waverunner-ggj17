@@ -16,7 +16,7 @@ public class NoteCheck : MonoBehaviour {
 	void Update() {
 		verifyCheck = true;
 		if (noteToCheck == 0) {
-			Debug.Log (MidiMaster.GetKeyDown (MidiChannel.All, noteToCheck).ToString());
+			//Debug.Log (MidiMaster.GetKeyDown (MidiChannel.All, noteToCheck).ToString());
 		}
 		if (MidiMaster.GetKeyDown (noteToCheck)) {
 			Debug.Log ("KeyDownHappened with" + noteToCheck.ToString());

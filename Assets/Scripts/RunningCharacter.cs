@@ -27,9 +27,11 @@ public class RunningCharacter : MonoBehaviour {
 				inputTypeSpace = false;
 			}
 		} else {
-			inputTypeSpace = false;
+			inputTypeSpace = true;
 		}
-		NoteWatcher.instance.rc = this;
+		if (NoteWatcher.instance != null) {
+			NoteWatcher.instance.rc = this;
+		}
 		//this.nextNoteText.text = bm.chordNoteProgression.Peek ();
 
 	}
