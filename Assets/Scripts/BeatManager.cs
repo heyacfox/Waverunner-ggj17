@@ -153,7 +153,7 @@ public class BeatManager : MonoBehaviour {
 			dequeuedNote = chordNoteProgression.Dequeue ();
 			txt = Instantiate (chordTextPrefab, chordPanel);
 			txt.text = dequeuedNote;
-			txt.fontSize = Mathf.RoundToInt(timechange * 20f);
+			txt.fontSize = Mathf.RoundToInt(timechange * 40f);
 			chordPull = dequeuedNote;
 			chordNoteProgression.Enqueue (dequeuedNote);
 			chordChangeTimings.Enqueue (timechange);
