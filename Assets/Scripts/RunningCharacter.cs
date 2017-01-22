@@ -140,7 +140,7 @@ public class RunningCharacter : MonoBehaviour {
 				characterFalls ();
 			}
 		}
-		if (this.transform.position.y <= -15) {
+		if (this.transform.position.y <= -15 || this.transform.position.x <= -15) {
 			SceneManager.LoadScene ("CreditsScene");
 		}
 		if (this.transform.position.y > 4) {

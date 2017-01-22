@@ -95,7 +95,7 @@ public class BeatManager : MonoBehaviour {
 		chordNoteProgression.Enqueue("CSmin9");
 		chordNoteProgression.Enqueue ("FINAL");
 
-		initializeChordQueueList ();
+
 
 		chordChangeTimings = new Queue<float> ();
 		/*
@@ -135,7 +135,7 @@ public class BeatManager : MonoBehaviour {
 		chordChangeTimings.Enqueue(beatTimerWN);
 		chordChangeTimings.Enqueue(beatTimerWN);
 		chordChangeTimings.Enqueue(beatTimerHN);
-
+		initializeChordQueueList ();
 
 		rc.nextNoteText.text = this.chordNoteProgression.Peek ();
 
@@ -145,15 +145,18 @@ public class BeatManager : MonoBehaviour {
 	void initializeChordQueueList() {
 		string chordPull = "start";
 		string dequeuedNote;
+		float timechange;
 		GameObject go;
 		Text txt;
 		while (!chordPull.Equals ("FINAL")) {
-
+			timechange = chordChangeTimings.Dequeue ();
 			dequeuedNote = chordNoteProgression.Dequeue ();
 			txt = Instantiate (chordTextPrefab, chordPanel);
 			txt.text = dequeuedNote;
+			txt.fontSize = Mathf.RoundToInt(timechange * 20f);
 			chordPull = dequeuedNote;
 			chordNoteProgression.Enqueue (dequeuedNote);
+			chordChangeTimings.Enqueue (timechange);
 		}
 
 		txt = Instantiate (chordTextPrefab, chordPanel);
@@ -224,6 +227,7 @@ public class BeatManager : MonoBehaviour {
 				currentChord = nextNote;
 				Destroy(chordPanel.GetChild (0).gameObject);
 				rc.nextNoteText.text = currentChord;
+				//rc.nextNoteText.fontSize = 10 * nextChange;
 				ps.spawnPlatforms (nextNote, nextChange);
 				chordNoteProgression.Enqueue (nextNote);
 
