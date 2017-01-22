@@ -34,6 +34,8 @@ public class BeatManager : MonoBehaviour {
 	public float realTimeScale;
 	public RunningCharacter rc;
 	public string currentChord;
+	public Transform chordPanel;
+	public Text chordTextPrefab;
 
 
 	// Use this for initialization
@@ -93,6 +95,8 @@ public class BeatManager : MonoBehaviour {
 		chordNoteProgression.Enqueue("CSmin9");
 		chordNoteProgression.Enqueue ("FINAL");
 
+		initializeChordQueueList ();
+
 		chordChangeTimings = new Queue<float> ();
 		/*
 		chordChangeTimings.Enqueue (beatTimerWN);
@@ -138,6 +142,29 @@ public class BeatManager : MonoBehaviour {
 
 	}
 
+	void initializeChordQueueList() {
+		string chordPull = "start";
+		string dequeuedNote;
+		GameObject go;
+		Text txt;
+		while (!chordPull.Equals ("FINAL")) {
+
+			dequeuedNote = chordNoteProgression.Dequeue ();
+			txt = Instantiate (chordTextPrefab, chordPanel);
+			txt.text = dequeuedNote;
+			chordPull = dequeuedNote;
+			chordNoteProgression.Enqueue (dequeuedNote);
+		}
+
+		txt = Instantiate (chordTextPrefab, chordPanel);
+		txt.text = "FINAL";
+		chordNoteProgression.Enqueue ("FINAL");
+
+
+
+
+	}
+
 	public bool checkIfPoint() {
 		if (!pointGainedThisBeat) {
 			if (activeTime - acceptableVariance <= 0 ||
@@ -158,6 +185,7 @@ public class BeatManager : MonoBehaviour {
 			float nextChange = chordChangeTimings.Dequeue ();
 
 			chordChangeTimings.Enqueue (nextChange);
+			Destroy(chordPanel.GetChild (0).gameObject);
 			StartCoroutine (PeriodicUpdater(nextChange));
 			string cnp = chordNoteProgression.Dequeue ();
 			currentChord = cnp;
@@ -193,6 +221,7 @@ public class BeatManager : MonoBehaviour {
 					SceneManager.LoadScene("CreditsScene");
 				}
 				currentChord = nextNote;
+				Destroy(chordPanel.GetChild (0).gameObject);
 				rc.nextNoteText.text = currentChord;
 				ps.spawnPlatforms (nextNote, nextChange);
 				chordNoteProgression.Enqueue (nextNote);
